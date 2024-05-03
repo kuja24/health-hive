@@ -1,10 +1,11 @@
 import styled from 'styled-components'
-import React from 'react'
+import React, { useState } from 'react'
 import {counts} from "../utils/data"
 import CountsCard from '../components/cards/CountsCard';
 import WeeklyStat from '../components/cards/WeeklyStat';
 import CategoryChart from '../components/cards/CategoryChart';
 import AddWorkout from '../components/AddWorkout';
+import WorkoutCard from '../components/cards/WorkoutCard';
 
 const Container = styled.div`
   flex: 1;
@@ -50,8 +51,19 @@ const Section = styled.div`
     gap: 12px;
   }
 `;
+const CardWrapper = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 100px;
+  @media (max-width: 600px) {
+    gap: 12px;
+  }
+`;
 const Dashboard = () => {
     const data = [];
+    const [workout, setWorkout] = useState("")
   return <Container>
     <Wrapper>
         <Title>Dashboard</Title>
@@ -63,9 +75,14 @@ const Dashboard = () => {
         <FlexWrap>
             <WeeklyStat data={data} />
             <CategoryChart data={data} />
-            <AddWorkout />
+            <AddWorkout workout={workout} setWorkout={setWorkout}/>
         </FlexWrap>
-        
+        <Section>
+          <Title>Today's workout</Title>
+          <CardWrapper>
+            <WorkoutCard workout={workout} />
+          </CardWrapper>
+        </Section>
     </Wrapper>
   </Container>
 }
