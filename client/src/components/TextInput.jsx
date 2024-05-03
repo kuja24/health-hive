@@ -120,6 +120,7 @@ const Chip = styled.div`
   background: ${({ theme }) => theme.primary + 10};
   color: ${({ theme }) => theme.primary};
   font-size: 12px;
+  font-family: Bradley Hand, cursive;
   display: flex;
   align-items: center;
   gap: 4px;

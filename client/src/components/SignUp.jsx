@@ -15,11 +15,13 @@ const Container = styled.div`
 `;
 const Title = styled.div`
   font-size: 30px;
+  font-family: Bradley Hand, cursive;
   font-weight: 800;
   color: ${({ theme }) => theme.text_primary};
 `;
 const Span = styled.div`
   font-size: 16px;
+  font-family: Bradley Hand, cursive;
   font-weight: 400;
   color: ${({ theme }) => theme.text_secondary + 90};
 `;

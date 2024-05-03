@@ -15,6 +15,7 @@ const Container = styled.div`
 `;
 const Title = styled.div`
   font-size: 30px;
+  font-family: Bradley Hand, cursive;
   font-weight: 800;
   color: ${({ theme }) => theme.text_primary};
 `;
@@ -59,7 +60,8 @@ const SignIn = () => {
   };
   return <Container>
     <div>
-        <Title>Welcome To HealthHive 👋</Title>
+        <Title>Unlock your Fitness Journey! 🏋️‍♂️ </Title>
+        <Title>Welcome To HealthHive </Title>
         <Span>Please login with your email & password</Span>
     </div>
     <div style={{

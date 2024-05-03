@@ -49,6 +49,7 @@ const Image = styled.img`
 
 const Text = styled.div`
   font-size: 16px;
+  font-family: Bradley Hand, cursive;
   text-align: center;
   color: ${({ theme }) => theme.text_secondary};
   margin-top: 16px;
