@@ -26,11 +26,11 @@ const Title = styled.div`
   }
 `;
 
-const AddWorkout = ({workout, setWorkout, addNewWorkout, buttonLoading}) => {
-  return 
-  <Card>
-    <Title>Add New Workout</Title>
-    <TextInput
+const AddWorkout = ({ workout, setWorkout, addNewWorkout, buttonLoading }) => {
+  return (
+    <Card>
+      <Title>Add New Workout</Title>
+      <TextInput
         label="Workout"
         textArea
         rows={10}
@@ -52,7 +52,8 @@ const AddWorkout = ({workout, setWorkout, addNewWorkout, buttonLoading}) => {
         isLoading={buttonLoading}
         isDisabled={buttonLoading}
       />
-  </Card>
-}
+    </Card>
+  );
+};
 
-export default AddWorkout
+export default AddWorkout;

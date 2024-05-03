@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import { MenuRounded } from "@mui/icons-material";
-import { Avatar } from "@mui/material";
+import React, { useState } from "react";
+import styled from "styled-components";
 import LogoImg from "../utils/Images/Logo.png";
 import { Link as LinkR, NavLink } from "react-router-dom";
+import { MenuRounded } from "@mui/icons-material";
+import { Avatar } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { logout } from "../redux/reducers/userSlice";
 
@@ -44,7 +44,6 @@ const NavLogo = styled(LinkR)`
 const Logo = styled.img`
   height: 42px;
 `;
-
 const Mobileicon = styled.div`
   color: ${({ theme }) => theme.text_primary};
   display: none;
@@ -53,27 +52,7 @@ const Mobileicon = styled.div`
     align-items: center;
   }
 `;
-const UserContainer = styled.div`
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: flex-end;
-  gap: 16px;
-  align-items: center;
-  padding: 0 6px;
-  color: ${({ theme }) => theme.primary};
-`;
-const TextButton = styled.div`
-  text-align: end;
-  color: ${({ theme }) => theme.secondary};
-  cursor: pointer;
-  font-size: 16px;
-  transition: all 0.3s ease;
-  font-weight: 600;
-  &:hover {
-    color: ${({ theme }) => theme.primary};
-  }
-`;
+
 const NavItems = styled.ul`
   width: 100%;
   display: flex;
@@ -104,6 +83,28 @@ const Navlink = styled(NavLink)`
   }
 `;
 
+const UserContainer = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+  align-items: center;
+  padding: 0 6px;
+  color: ${({ theme }) => theme.primary};
+`;
+const TextButton = styled.div`
+  text-align: end;
+  color: ${({ theme }) => theme.secondary};
+  cursor: pointer;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  font-weight: 600;
+  &:hover {
+    color: ${({ theme }) => theme.primary};
+  }
+`;
+
 const MobileMenu = styled.ul`
   display: flex;
   flex-direction: column;
@@ -126,16 +127,18 @@ const MobileMenu = styled.ul`
   z-index: ${({ isOpen }) => (isOpen ? "1000" : "-1000")};
 `;
 
-const Navbar = (currentUser) => {
-    const [isOpen, setisopen] = useState(false);
-  return <Nav>
-    <NavContainer>
-        <Mobileicon onClick={() => setisopen(!isOpen)}>
-            <MenuRounded sx={{ color: "inherit" }} />
+const Navbar = ({ currentUser }) => {
+  const dispatch = useDispatch();
+  const [isOpen, setisOpen] = useState(false);
+  return (
+    <Nav>
+      <NavContainer>
+        <Mobileicon onClick={() => setisOpen(!isOpen)}>
+          <MenuRounded sx={{ color: "inherit" }} />
         </Mobileicon>
         <NavLogo to="/">
-            <Logo src={LogoImg}/>
-            HealthHive
+          <Logo src={LogoImg} />
+          HealthHive
         </NavLogo>
 
         <MobileMenu isOpen={isOpen}>
@@ -147,19 +150,20 @@ const Navbar = (currentUser) => {
         </MobileMenu>
 
         <NavItems>
-            <Navlink to="/">Dashboard</Navlink>
-            <Navlink to="/workouts">Workouts</Navlink>
-            <Navlink to="/tutorials">Tutorials</Navlink>
-            <Navlink to="/blogs">Blogs</Navlink>
-            <Navlink to="/contact">Contact</Navlink>
+          <Navlink to="/">Dashboard</Navlink>
+          <Navlink to="/workouts">Workouts</Navlink>
+          <Navlink to="/tutorials">Tutorials</Navlink>
+          <Navlink to="/blogs">Blogs</Navlink>
+          <Navlink to="/contact">Contact</Navlink>
         </NavItems>
 
         <UserContainer>
-            <Avatar src={currentUser?.img}>{currentUser?.name[0]}</Avatar>
-            <TextButton onClick={() => dispatch(logout())}>Logout</TextButton>
+          <Avatar src={currentUser?.img}>{currentUser?.name[0]}</Avatar>
+          <TextButton onClick={() => dispatch(logout())}>Logout</TextButton>
         </UserContainer>
-    </NavContainer>
-  </Nav>
-}
+      </NavContainer>
+    </Nav>
+  );
+};
 
-export default Navbar
+export default Navbar;

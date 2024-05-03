@@ -29,6 +29,7 @@ export const UserRegister = async(req, res, next) => {
         const token = jwt.sign({ id: createdUser._id }, process.env.SECRET, {
             expiresIn: "5 hours",
           });
+          console.log(createdUser)
           
         return res.status(200).json({ token, user });
     } catch (err) {
@@ -214,6 +215,7 @@ export const UserLogin = async (req, res, next) => {
   
       return res.status(200).json({ todaysWorkouts, totalCaloriesBurnt });
     } catch (err) {
+        console.log(err);
       next(err);
     }
   };

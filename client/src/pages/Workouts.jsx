@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import WorkoutCard from '../components/cards/WorkoutCard';
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";

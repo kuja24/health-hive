@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import TextInput from "./TextInput";
 import Button from "./Button";
@@ -88,7 +88,10 @@ const SignUp = () => {
         handelChange={(e) => setPassword(e.target.value)}
         />
 
-        <Button text="SignUp" />
+        <Button text="SignUp" 
+        onClick={handelSignUp}
+        isLoading={loading}
+        isDisabled={buttonDisabled}/>
         </div>
   </Container>
 }

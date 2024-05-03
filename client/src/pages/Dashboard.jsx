@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import {counts} from "../utils/data"
 import CountsCard from '../components/cards/CountsCard';
 import WeeklyStat from '../components/cards/WeeklyStat';
@@ -63,7 +63,7 @@ const CardWrapper = styled.div`
   }
 `;
 const Dashboard = () => {
-    cconst [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(false);
     const [data, setData] = useState();
     const [buttonLoading, setButtonLoading] = useState(false);
     const [todaysWorkouts, setTodaysWorkouts] = useState([]);
@@ -84,7 +84,7 @@ const Dashboard = () => {
     };
     const getTodaysWorkout = async () => {
       setLoading(true);
-      const token = localStorage.getItem("fittrack-app-token");
+      const token = localStorage.getItem("healthhive-token");
       await getWorkouts(token, "").then((res) => {
         setTodaysWorkouts(res?.data?.todaysWorkouts);
         console.log(res.data);
@@ -94,7 +94,7 @@ const Dashboard = () => {
   
     const addNewWorkout = async () => {
       setButtonLoading(true);
-      const token = localStorage.getItem("fittrack-app-token");
+      const token = localStorage.getItem("healthhive-token");
       await addWorkout(token, { workoutString: workout })
         .then((res) => {
           dashboardData();
