@@ -41,7 +41,8 @@ const AddWorkout = ({ workout, setWorkout, addNewWorkout, buttonLoading }) => {
 -Sets
 -Reps
 -Weight
--Duration`}
+-Duration
+-Calories Burned`}
         value={workout}
         handelChange={(e) => setWorkout(e.target.value)}
       />

@@ -52,12 +52,27 @@ const Details = styled.div`
 `;
 
 const WorkoutCard = ({ workout }) => {
+  function checkNullOrZero(value) {
+    if (value === undefined || value === null || value === 0) {
+      
+      return true;
+    } else {
+      
+      return false;
+    }
+  }
   return (
     <Card>
       <Category>#{workout?.category}</Category>
       <Name>{workout?.workoutName}</Name>
-      <Sets>
+      {checkNullOrZero(workout.sets) === true ? 
+      (<Sets>
+        Wohoo! This is different than gym!
+     </Sets>) : (<Sets>
         Count: {workout?.sets} sets X {workout?.reps} reps
+     </Sets>)}
+      <Sets>
+         Count: {workout?.sets} sets X {workout?.reps} reps
       </Sets>
       <Flex>
         <Details>

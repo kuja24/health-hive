@@ -273,7 +273,7 @@ export const UserLogin = async (req, res, next) => {
   
       // Calculate calories burnt for each workout
       await parsedWorkouts.forEach(async (workout) => {
-        workout.caloriesBurned = parseFloat(calculateCaloriesBurnt(workout));
+        //workout.caloriesBurned = parseFloat(calculateCaloriesBurnt(workout));
         await Workout.create({ ...workout, user: userId });
       });
   
@@ -289,15 +289,21 @@ export const UserLogin = async (req, res, next) => {
   // Function to parse workout details from a line
   const parseWorkoutLine = (parts) => {
     const details = {};
+    console.log("----parts")
     console.log(parts);
     if (parts.length >= 5) {
       details.workoutName = parts[1].substring(1).trim();
+      console.log("workout name")
+      console.log(details.workoutName)
       details.sets = parseInt(parts[2].split("sets")[0].substring(1).trim());
       details.reps = parseInt(
         parts[2].split("sets")[1].split("reps")[0].substring(1).trim()
       );
       details.weight = parseFloat(parts[3].split("kg")[0].substring(1).trim());
       details.duration = parseFloat(parts[4].split("min")[0].substring(1).trim());
+      console.log("=====caloeris")
+      console.log(parseFloat(parts[5].split("cal")[0].substring(1).trim()))
+      details.caloriesBurned = parseFloat(parts[5].split("cal")[0].substring(1).trim())
       console.log(details);
       return details;
     }
