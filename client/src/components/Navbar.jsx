@@ -44,7 +44,7 @@ const NavLogo = styled(LinkR)`
 const Logo = styled.img`
   height: 42px;
 `;
-const Mobileicon = styled.div`
+const ResponsiveIconForMobile = styled.div`
   color: ${({ theme }) => theme.text_primary};
   display: none;
   @media screen and (max-width: 768px) {
@@ -53,7 +53,7 @@ const Mobileicon = styled.div`
   }
 `;
 
-const NavItems = styled.ul`
+const NavbarItemsContainer = styled.ul`
   width: 100%;
   display: flex;
   align-items: center;
@@ -66,7 +66,7 @@ const NavItems = styled.ul`
     display: none;
   }
 `;
-const Navlink = styled(NavLink)`
+const NavbarItem = styled(NavLink)`
   display: flex;
   align-items: center;
   color: ${({ theme }) => theme.text_primary};
@@ -105,7 +105,7 @@ const TextButton = styled.div`
   }
 `;
 
-const MobileMenu = styled.ul`
+const HamburgerMenuForMobile = styled.ul`
   display: flex;
   flex-direction: column;
   align-items: start;
@@ -133,27 +133,27 @@ const Navbar = ({ currentUser }) => {
   return (
     <Nav>
       <NavContainer>
-        <Mobileicon onClick={() => setisOpen(!isOpen)}>
+        <ResponsiveIconForMobile onClick={() => setisOpen(!isOpen)}>
           <MenuRounded sx={{ color: "inherit" }} />
-        </Mobileicon>
+        </ResponsiveIconForMobile>
         <NavLogo to="/">
           <Logo src={LogoImg} />
           HealthHive
         </NavLogo>
+{/* hamburger menu in case of mobile to make it responsive */}
+        <HamburgerMenuForMobile isOpen={isOpen}>
+          <NavbarItem to="/">Dashboard</NavbarItem>
+          <NavbarItem to="/workouts">Workouts</NavbarItem>
+          <NavbarItem to="/workout-plan">Workout Plan</NavbarItem>
+          <NavbarItem to="/contact">Contact</NavbarItem>
+        </HamburgerMenuForMobile>
 
-        <MobileMenu isOpen={isOpen}>
-          <Navlink to="/">Dashboard</Navlink>
-          <Navlink to="/workouts">Workouts</Navlink>
-          <Navlink to="/workout-plan">Workout Plan</Navlink>
-          <Navlink to="/contact">Contact</Navlink>
-        </MobileMenu>
-
-        <NavItems>
-          <Navlink to="/">Dashboard</Navlink>
-          <Navlink to="/workouts">Workouts</Navlink>
-          <Navlink to="/workout-plan">Workout Plan</Navlink>
-          <Navlink to="/contact">Contact</Navlink>
-        </NavItems>
+        <NavbarItemsContainer>
+          <NavbarItem to="/">Dashboard</NavbarItem>
+          <NavbarItem to="/workouts">Workouts</NavbarItem>
+          <NavbarItem to="/workout-plan">Workout Plan</NavbarItem>
+          <NavbarItem to="/contact">Contact</NavbarItem>
+        </NavbarItemsContainer>
 
         <UserContainer>
           <Avatar src={currentUser?.img}>{currentUser?.name[0]}</Avatar>

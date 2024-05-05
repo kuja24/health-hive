@@ -6,7 +6,7 @@ import { UserSignUp } from "../api";
 import { useDispatch } from "react-redux";
 import { loginSuccess } from "../redux/reducers/userSlice";
 
-const Container = styled.div`
+const StyledContainer = styled.div`
   width: 100%;
   max-width: 500px;
   display: flex;
@@ -19,7 +19,7 @@ const Title = styled.div`
   font-weight: 800;
   color: ${({ theme }) => theme.text_primary};
 `;
-const Span = styled.div`
+const StyledSpan = styled.div`
   font-size: 16px;
   font-family: Bradley Hand, cursive;
   font-weight: 400;
@@ -31,12 +31,12 @@ const SignUp = () => {
   const [loading, setLoading] = useState(false);
   const [buttonDisabled, setButtonDisabled] = useState(false);
   const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [userEmail, setEmail] = useState("");
+  const [userPassword, setPassword] = useState("");
 
-  const validateInputs = () => {
-    if (!name || !email || !password) {
-      alert("Please fill in all fields");
+  const validateFields = () => {
+    if (!name || !userEmail || !userPassword) {
+      alert("Please enter all details");
       return false;
     }
     return true;
@@ -45,11 +45,11 @@ const SignUp = () => {
   const handelSignUp = async () => {
     setLoading(true);
     setButtonDisabled(true);
-    if (validateInputs()) {
-      await UserSignUp({ name, email, password })
+    if (validateFields()) {
+      await UserSignUp({ name, email: userEmail, password: userPassword })
         .then((res) => {
           dispatch(loginSuccess(res.data));
-          alert("Account Created Success");
+          alert("Registration Successful");
           setLoading(false);
           setButtonDisabled(false);
         })
@@ -60,10 +60,10 @@ const SignUp = () => {
         });
     }
   };
-  return <Container>
+  return <StyledContainer>
     <div>
         <Title>Welcome To HealthHive 👋</Title>
-        <Span>Please enter your details</Span>
+        <StyledSpan>Please enter your details</StyledSpan>
     </div>
     <div style={{
           display: "flex",
@@ -79,14 +79,14 @@ const SignUp = () => {
         <TextInput 
         label="Email Address" 
         placeholder="Enter your email address" 
-        value={email}
+        value={userEmail}
         handelChange={(e) => setEmail(e.target.value)}
         />
 
         <TextInput 
         label="Password" 
         placeholder="Enter your password" 
-        value={password}
+        value={userPassword}
         handelChange={(e) => setPassword(e.target.value)}
         />
 
@@ -95,7 +95,7 @@ const SignUp = () => {
         isLoading={loading}
         isDisabled={buttonDisabled}/>
         </div>
-  </Container>
+  </StyledContainer>
 }
 
 export default SignUp

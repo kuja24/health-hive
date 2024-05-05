@@ -6,7 +6,7 @@ import { UserSignIn } from "../api";
 import { useDispatch } from "react-redux";
 import { loginSuccess } from "../redux/reducers/userSlice";
 
-const Container = styled.div`
+const StyledContainer = styled.div`
   width: 100%;
   max-width: 500px;
   display: flex;
@@ -32,9 +32,9 @@ const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const validateInputs = () => {
+  const validateFields = () => {
     if (!email || !password) {
-      alert("Please fill in all fields");
+      alert("Please enter all details");
       return false;
     }
     return true;
@@ -43,7 +43,7 @@ const SignIn = () => {
   const handelSignIn = async () => {
     setLoading(true);
     setButtonDisabled(true);
-    if (validateInputs()) {
+    if (validateFields()) {
       await UserSignIn({ email, password })
         .then((res) => {
           dispatch(loginSuccess(res.data));
@@ -58,7 +58,7 @@ const SignIn = () => {
         });
     }
   };
-  return <Container>
+  return <StyledContainer>
     <div>
         <Title>Unlock your Fitness Journey! 🏋️‍♂️ </Title>
         <Title>Welcome To HealthHive </Title>
@@ -89,7 +89,7 @@ const SignIn = () => {
         isDisabled={buttonDisabled}
         />
     </div>
-  </Container>
+  </StyledContainer>
 }
 
 export default SignIn

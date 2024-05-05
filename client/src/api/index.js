@@ -7,17 +7,17 @@ const API = axios.create({
 export const UserSignUp = async (data) => API.post("/user/signup", data);
 export const UserSignIn = async (data) => API.post("/user/signin", data);
 
-export const getDashboardDetails = async (token) =>
+export const fetchDashboardData = async (token) =>
   API.get("/user/dashboard", {
     headers: { Authorization: `Bearer ${token}` },
   });
 
-export const getWorkouts = async (token, date) =>
+export const fetchWorkoutsByDate = async (token, date) =>
   await API.get(`/user/workout${date}`, {
     headers: { Authorization: `Bearer ${token}` },
   });
 
-export const addWorkout = async (token, data) =>
+export const addNewWorkout = async (token, data) =>
   await API.post(`/user/workout`, data, {
     headers: { Authorization: `Bearer ${token}` },
   });

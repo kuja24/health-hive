@@ -5,7 +5,7 @@ import AuthImage from "../utils/Images/AuthImage.jpg";
 import SignIn from "../components/SignIn";
 import SignUp from "../components/SignUp";
 
-const Container = styled.div`
+const StyledContainer = styled.div`
   flex: 1;
   height: 100%;
   display: flex;
@@ -14,7 +14,7 @@ const Container = styled.div`
     flex-direction: column;
   }
 `;
-const Left = styled.div`
+const StyledLeftContainer = styled.div`
   flex: 1;
   position: relative;
   @media (max-width: 700px) {
@@ -22,7 +22,7 @@ const Left = styled.div`
   }
 `;
 
-const Right = styled.div`
+const StyledRightContainer = styled.div`
   flex: 1;
   position: relative;
   display: flex;
@@ -66,12 +66,12 @@ const TextButton = styled.span`
 
 const Authentication = () => {
   const [login, setLogin] = useState(false);
-  return <Container>
-    <Left>
+  return <StyledContainer>
+    <StyledLeftContainer>
         <Logo src={LogoImage} />
         <Image src={AuthImage} />
-    </Left>
-    <Right>
+    </StyledLeftContainer>
+    <StyledRightContainer>
     {!login ? (
           <>
             <SignIn />
@@ -89,8 +89,8 @@ const Authentication = () => {
             </Text>
           </>
         )}
-    </Right>
-  </Container>
+    </StyledRightContainer>
+  </StyledContainer>
 }
 
 export default Authentication

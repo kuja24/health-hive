@@ -6,7 +6,7 @@ import WeeklyStat from '../components/cards/WeeklyStat';
 import CategoryChart from '../components/cards/CategoryChart';
 import AddWorkout from '../components/AddWorkout';
 import WorkoutCard from '../components/cards/WorkoutCard';
-import { addWorkout, getDashboardDetails, getWorkouts } from "../api";
+import { addNewWorkout, fetchDashboardData, fetchWorkoutsByDate } from "../api";
 
 const Container = styled.div`
   flex: 1;
@@ -74,32 +74,32 @@ const Dashboard = () => {
   -10 min
   -300 cal`);
   
-    const dashboardData = async () => {
+    const getDashboardData = async () => {
       setLoading(true);
       const token = localStorage.getItem("healthhive-token");
-      await getDashboardDetails(token).then((res) => {
+      await fetchDashboardData(token).then((res) => {
         setData(res.data);
         console.log(res.data);
         setLoading(false);
       });
     };
-    const getTodaysWorkout = async () => {
+    const getTodaysWorkoutByDate = async () => {
       setLoading(true);
       const token = localStorage.getItem("healthhive-token");
-      await getWorkouts(token, "").then((res) => {
+      await fetchWorkoutsByDate(token, "").then((res) => {
         setTodaysWorkouts(res?.data?.todaysWorkouts);
         console.log(res.data);
         setLoading(false);
       });
     };
   
-    const addNewWorkout = async () => {
+    const handleAddNewWorkout = async () => {
       setButtonLoading(true);
       const token = localStorage.getItem("healthhive-token");
-      await addWorkout(token, { workoutString: workout })
+      await addNewWorkout(token, { workoutString: workout })
         .then((res) => {
-          dashboardData();
-          getTodaysWorkout();
+          getDashboardData();
+          getTodaysWorkoutByDate();
           setButtonLoading(false);
         })
         .catch((err) => {
@@ -108,8 +108,8 @@ const Dashboard = () => {
     };
   
     useEffect(() => {
-      dashboardData();
-      getTodaysWorkout();
+      getDashboardData();
+      getTodaysWorkoutByDate();
     }, []);
   return <Container>
     <Wrapper>
@@ -123,7 +123,7 @@ const Dashboard = () => {
             <WeeklyStat data={data} />
             <CategoryChart data={data} />
             <AddWorkout workout={workout} setWorkout={setWorkout}
-            addNewWorkout={addNewWorkout}
+            addNewWorkout={handleAddNewWorkout}
             buttonLoading={buttonLoading}
             />
         </FlexWrap>
